@@ -1,0 +1,36 @@
+version: '3'
+services:
+  app:
+    build: .
+    env_file:
+      - ./environments/db.env
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    volumes:
+      - .:/rails-study-app
+      - public-data:/rails-study-app/public
+      - tmp-data:/rails-study-app/tmp
+      - log-data:/rails-study-app/log
+    depends_on:
+      - db
+  db:
+    image: postgres
+    env_file:
+      - ./environments/db.env
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: nginx
+    volumes:
+      - public-data:/rails-study-app/public
+      - tmp-data:/rails-study-app/tmp
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+volumes:
+    public-data:
+    tmp-data:
+    log-data:
+    db-data:
