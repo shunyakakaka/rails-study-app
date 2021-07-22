@@ -1,0 +1,14 @@
+= render partial: "shared/error_message"
+
+= render partial: "shared/header"
+
+.ui.container
+  .ui.form
+    = form_with model: @record do |f|
+      .field
+        = f.label :time
+        = f.text_field :time
+      .field
+        = f.label :task_kind
+        = f.text_field :task_kind
+      = f.submit "記録", class: "ui blue button"
