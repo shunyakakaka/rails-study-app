@@ -58,7 +58,6 @@ class UsersController < ApplicationController
 
   def set_rank
     @users = User.all
-    i = 0
     k = 0
     has_records_user = []
     no_records_user = []

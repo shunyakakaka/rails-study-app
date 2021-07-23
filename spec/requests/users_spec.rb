@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
+  before "ログイン状態にする" do
+    
+  end
   describe "GET /index" do
     it "returns http success" do
       get "/users/index"
