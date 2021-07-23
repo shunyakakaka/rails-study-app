@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :record do
-    user { nil }
-    time { 1 }
-    total_time { 1 }
-    task_kind { "MyString" }
+    time {60}
+    task_kind {"プログラミング"}
+    user
   end
 end
