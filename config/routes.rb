@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'records/index'
-  get 'records/new'
-  get 'records/create'
   root 'home#index'
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"

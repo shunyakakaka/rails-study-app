@@ -1,25 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "Records", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/records/index"
-      expect(response).to have_http_status(:success)
+  before "ログイン状態にしておく" do
+    @user = FactoryBot.create(:user)
+    session_params = {session: {name: @user.name, gender: @user.gender, age: @user.age, job: @user.job, description: @user.description, overall_ranking: @user.overall_ranking, password: @user.password}}
+    post "/login", params: session_params
+  end
+
+  describe "showアクションがよばれた時" do
+    it "正常に表示されているかどうか" do
+      get "/users/#{@user.id}"
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET /new" do
-    it "returns http success" do
+  describe "newアクションがよばれた時" do
+    it "正常に表示されているかどうか" do
       get "/records/new"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/records/create"
-      expect(response).to have_http_status(:success)
-    end
-  end
+  #ok
 
 end

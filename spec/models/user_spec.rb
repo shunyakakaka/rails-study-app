@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
       @user_2 = FactoryBot.create(:user, name: "テストユーザー2")
       @record_2 = FactoryBot.create(:record, user: @user_2, total_time: 120)
       @user_3 = FactoryBot.create(:user, name: "片田竣也")
+    
       def set_rank
         @users = User.all
         k = 0
@@ -57,4 +58,5 @@ RSpec.describe User, type: :model do
       expect(@users[2].overall_ranking).to eq 3
     end
   end
+  #ok
 end

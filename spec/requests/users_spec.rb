@@ -1,49 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  before "ログイン状態にする" do
-    
+
+  before "ログイン状態にしておく" do 
+    @user = FactoryBot.create(:user)
+    session_params = {session: {name: @user.name, gender: @user.gender, age: @user.age, job: @user.job, description: @user.description, overall_ranking: @user.overall_ranking, password: @user.password}}
+    post "/login", params: session_params
   end
-  describe "GET /index" do
-    it "returns http success" do
-      get "/users/index"
-      expect(response).to have_http_status(:success)
+  
+  describe "indexアクションがよばれた時" do
+    it "正常に表示されているか" do
+      get "/users"
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET /new" do
-    it "returns http success" do
+  describe "newアクションがよばれた時" do
+    it "正常に表示されているか" do
       get "/users/new"
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/users/create"
-      expect(response).to have_http_status(:success)
+
+  describe "showアクションがよばれた時" do
+    it "正常に表示されているか" do
+      get "/users/#{@user.id}"
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET /show" do
-    it "returns http success" do
-      get "/users/show"
-      expect(response).to have_http_status(:success)
+  describe "editアクションがよばれた時" do
+    it "正常に表示されているか" do
+      get "/users/#{@user.id}/edit"
+      expect(response).to have_http_status(200)
     end
   end
 
-  describe "GET /edit" do
-    it "returns http success" do
-      get "/users/edit"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /update" do
-    it "returns http success" do
-      get "/users/update"
-      expect(response).to have_http_status(:success)
-    end
-  end
+  #ok
 
 end
